@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qingshixun.module.edu.Dao.EducationDao">
+	<!-- 获取教育信息集合 -->
+	<select id="getlist" resultType="EducationDTO">
+		SELECT
+			e.id,
+			e.time,
+			e.school,
+			e.description
+		FROM
+			t_education e
+	</select>
+	<select id="getpage" parameterType="int" resultType="EducationDTO">
+		SELECT
+			e.id,
+			e.time,
+			e.school,
+			e.description
+		FROM
+			t_education e
+		limit 
+		  	${index},2
+	</select>
+	<!-- 根据id查找信息 -->
+	<select id="geteducation" resultType="EducationDTO">
+		SELECT
+			e.id,
+			e.time,
+			e.school,
+			e.description
+		FROM
+			t_education e
+		WHERE
+			id = ${id}
+	</select>
+	<!-- 新增或更新教育经历-->
+	<insert id="saveorupdate">
+		INSERT INTO t_education (
+			id,
+			time,
+			school,
+			description
+		)VALUES (
+			#{id},
+			#{time},
+			#{school},
+			#{description}
+		)
+		ON DUPLICATE KEY UPDATE
+			time = #{time},
+			school = #{school},
+			description = #{description}
+	</insert>
+	<!-- 删除 -->
+	<delete id="delete">
+		DELETE 
+			FROM
+		t_education
+			WHERE
+		id = ${id }
+	</delete>
+</mapper>

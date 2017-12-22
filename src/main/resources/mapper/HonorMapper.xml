@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qingshixun.module.honor.Dao.HonorDao">
+	<select id="getHonor" resultType="HonorDTO">
+		SELECT
+			h.id,
+			h.name,
+			h.description
+		FROM
+			t_honor h
+	</select>
+	<delete id="deleteHonor">
+		DELETE
+			FROM
+		t_honor
+			WHERE
+		id = ${id}
+	</delete>
+	<select id="gethonor" resultType="HonorDTO">
+		SELECT
+			h.id,
+			h.name,
+			h.description
+		FROM
+			t_honor h
+		WHERE
+			id = ${id}
+	</select>
+	
+	<!-- 新增或更新榮譽-->
+	<insert id="saveorupdate">
+		INSERT INTO t_honor (
+			id,
+			name,
+			description
+		)VALUES (
+			#{id},
+			#{name},
+			#{description}
+		)
+		ON DUPLICATE KEY UPDATE
+			name = #{name},
+			description=#{description}
+	</insert>
+	
+</mapper>

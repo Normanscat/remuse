@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qingshixun.module.hobby.Dao.HobbyDao">
+	<select id="getHobby" resultType="HobbyDTO">
+		SELECT
+			h.id,
+			h.name
+		FROM
+			t_hobby h
+	</select>
+	<update id="updatehobby">
+	UPDATE 
+		t_hobby 
+   	 SET name = case id
+   	 	when "${ids[0]}" THEN "${names[0]}"
+   	 	when "${ids[1]}" THEN "${names[1]}"
+   	 	when "${ids[2]}" THEN "${names[2]}"
+   	 	when "${ids[3]}" THEN "${names[3]}"
+   	 	when "${ids[4]}" THEN "${names[4]}"
+   	 	when "${ids[5]}" THEN "${names[5]}"
+   	 END
+   		 WHERE id in ("${ids[0]}","${ids[1]}","${ids[2]}","${ids[3]}","${ids[4]}","${ids[5]}")
+	</update>
+</mapper>

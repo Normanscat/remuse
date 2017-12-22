@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qingshixun.module.me.Dao.MeDao">
+<select id="getMe" resultType="MeDTO">
+	SELECT
+			m.id,
+			m.name,
+			m.address,
+			m.gender,
+			m.worktime,
+			m.Email,
+			m.birthday,
+			m.iphone,
+			m.life,
+			e.name AS 'edu.name',
+			w.name AS  'workstate.name'
+		FROM
+			t_Me m,
+			t_edu e,
+			t_workstate w
+		WhERE
+			m.edu=e.id AND
+			m.workstate=w.id
+</select>
+<update id="updateMe">
+	UPDATE
+		t_Me
+	SET
+		name=#{name},
+		edu=#{edu.name},
+		address=#{address},
+		gender=#{gender},
+		worktime=#{worktime},
+		Email=#{Email},
+		birthday=#{birthday},
+		workstate=#{workstate.name},
+		iphone=#{iphone},
+		life=#{life}
+	WHERE
+		id=#{id}
+</update>
+</mapper>

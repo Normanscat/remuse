@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qingshixun.module.skill.Dao.SkillDao">
+	<select id="getlist" resultType="SkillDTO">
+		SELECT
+			s.id,
+			s.name,
+			s.level
+		FROM
+			t_skill s
+	</select>
+	<!-- 更新技能 -->
+	<update id="update" parameterType="java.util.List">
+		UPDATE
+			t_skill
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="name =case" suffix="end,">
+				<foreach collection="list" item="item" index="index">
+					when
+					id=#{item.id} then #{item.name}
+				</foreach>
+			</trim>
+			<trim prefix="level =case" suffix="end,">
+				<foreach collection="list" item="item" index="index">
+					when
+					id=#{item.id} then #{item.level}
+				</foreach>
+			</trim>
+		</trim>
+		WHERE id in
+		<foreach collection="list" index="index" item="item"
+			separator="," open="(" close=")">
+			#{item.id,jdbcType=INTEGER}
+		</foreach>
+	</update>
+</mapper>

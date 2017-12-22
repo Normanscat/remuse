@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qingshixun.module.workExperience.Dao.WorkExperienceDao">
+	<select id="getlist" resultType="WorkExperienceDTO">
+		SELECT
+			w.id,
+			w.title,
+			w.time,
+			w.description
+		FROM
+			t_workExperience w
+	</select>
+	<select id="getworkExperience" resultType="WorkExperienceDTO">
+		SELECT
+			w.id,
+			w.title,
+			w.time,
+			w.description
+		FROM
+			t_workExperience w
+		WHERE
+			id = ${id}
+	</select>
+	<!-- 新增或更新工作经验-->
+	<insert id="saveorupdate">
+		INSERT INTO t_workExperience (
+			id,
+			title,
+			time,
+			description
+		)VALUES (
+			#{id},
+			#{title},
+			#{time},
+			#{description}
+		)
+		ON DUPLICATE KEY UPDATE
+			time = #{time},
+			title = #{title},
+			description=#{description}
+	</insert>
+	<delete id="delete">
+		DELETE
+			FROM
+		t_workExperience
+			WHERE
+		id = ${id}
+	</delete>
+</mapper>
